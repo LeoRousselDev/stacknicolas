@@ -1,0 +1,129 @@
+{# héritage du fichier de base twig header et footer #}
+{% extends 'base.html.twig' %}
+{# theme bootstrap  pour les formumaire symfony #}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{# balise title #}
+{% block title %}Catalogue{% endblock %}
+{# balise body #}
+{% block body %}
+    <div class="container">
+        <h1>Catalogue</h1>
+        {% for message in app.flashes('add_product') %}
+            <div class="alert alert-success">
+                {{ message }} <a class="link_notif" href="{{ path('cart_index') }}">Voir mon panier</a>
+            </div>
+        {% endfor %}
+        <div class="top_filter">
+            <div class="row">
+                <div class="col-sm-12 col-lg-9">
+                    {# breadcrumb #}
+                    <ol class="breadcrumb_stack">
+                        <li><a href="{{ path('home') }}" title="Accueil">Accueil ></a></li>
+                        <li><a href="{{ path('catalog') }}" title="formations">Catalogue</a></li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-lg-3">
+                    {# Filtres et tri #}
+                    <div class="jumbotron">
+                        <div class="container-fluid">
+                            {{ form_start(form) }}
+                            <div class="form-row">
+                                <div class="col-12 mt-1">
+                                    <p>Filtrer par :</p>
+                                    {{ form_widget(form.maxPrice) }}
+                                </div>
+                                <div class="col-12 mt-1">
+                                    {{ form_widget(form.selectedCategory) }}
+                                </div>
+                                <div class="col-12 mt-1">
+                                    {{ form_widget(form.searchbar) }}
+                                </div>
+                                <div class="col-12 mt-1">
+                                    <p>Trier par : </p>
+                                    <p>{{ form_widget(form.orderBy1) }}</p>
+                                </div>
+                                <div class="col-12 mt-1 text-center">
+                                    <button type="submit" class="btn btn-primary">Valider</button>
+                                </div>
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-lg-9">
+                    {# Présentation rapide nos origami #}
+                    <h1 class="font-weight-normal">Nos origami</h1>
+                    <p class="font-weight-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+                        congue justo a purus iaculis vestibulum.
+                        Aenean eleifend porttitor lorem, ut venenatis nisl ultricies ac. Pellentesque dolor turpis,
+                        maximus id ult
+                        rices imperdiet, sagittis ut est. Aliquam nisi diam, semper quis sem in, porta hendrerit nunc.
+                        Vivamus imp
+                        erdiet mattis dui, at scelerisque ipsum cursus sit amet. Phasellus iaculis egestas eros.
+                        Phasellus mattis ma
+                        ssa molestie tincidunt hendrerit. Vestibulum pulvinar vel odio vitae accumsan. Nulla non pel
+                        lentesque dolor. Sed quis commodo magna.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="top_filter mt-3 text-center">
+            <div class="row">
+                <div class="col">
+                    <p>Affichage de
+                        {% if products.getTotalItemCount >= 24 %}
+                            24
+                        {% else %}
+                            {{ products.getTotalItemCount }} {# Si il y a moins de 24 produits #}
+                        {% endif %}
+                        produits sur {{ products.getTotalItemCount }} résultats</p>
+                </div>
+            </div>
+
+            <div class="products col-12">
+                <div class="row">
+                    {# boucle pour afficher les articles #}
+                    {% for product in products %}
+                        <div class="col-4 mt-3">
+                            <a class="lien_card" href="{{ path('product_show', {'id': product.id}) }}">
+                                <div class="card-product">
+                                    <img class="card-img-top" src="{{ product.picture }}"
+                                         alt="{{ product.libelle }} image">
+                                    <div class="card-body">
+                                        <p class="card-title">{{ product.libelle }}
+                                            - {{ product.productCategory.name }}</p>
+                                        <p class="card-text small">Ajouter
+                                            le {{ product.createdAt | date('d/m/Y') }}</p>
+                                        <p class="card-text text-danger">
+                                            <span class="text-primary">
+                                                {% if product.stars is same as (NULL) %}
+                                                    Pas encore de note
+                                                {% else %}
+                                                    {{ product.stars }} ⭐
+                                                {% endif %}
+                                            </span> - {{ product.price }}€
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-6 pagination">
+                        {{ knp_pagination_render(products) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

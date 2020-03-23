@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Newletters{% endblock %}
+
+{% block body %}
+    <h1>Newletters</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ newletter.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ newletter.email }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ newletter.date ? newletter.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('newletters_index') }}">back to list</a>
+
+    <a href="{{ path('newletters_edit', {'id': newletter.id}) }}">edit</a>
+
+    {{ include('newletters/_delete_form.html.twig') }}
+{% endblock %}

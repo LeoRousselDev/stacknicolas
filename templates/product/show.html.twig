@@ -1,0 +1,133 @@
+{# héritage du fichier de base twig header et footer #}
+{% extends 'base.html.twig' %}
+{# balise title #}
+{% block title %}{{ product.libelle }}{% endblock %}
+
+{% block body %}
+    <div class="container text-center">
+        <div class="col-sm-12 col-lg-9">
+            {# breadcrumb #}
+            <ol class="breadcrumb_stack">
+                <li><a href="{{path('home')}}" title="Accueil">Accueil ></a></li>
+                <li><a href="{{path('catalog')}}" title="formations">Catalogue ></a></li>
+                <li><a href="{{ path('product_show', {'id': product.id}) }}" title="formations">{{ product.libelle }}</a></li>
+            </ol>
+
+        </div>
+        {# Présentation sous forme de cards #}
+        <div class="back mt-2 mb-4" >
+            <div class="card_show">
+                {# Image de la card #}
+
+            <div class="card_show">
+                <div class="col-12 text-center">
+                    {% if product.id >= 10 %}
+                        <h1><span class="badge_product_new">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="33" height="31.395" viewBox="0 0 33 31.395">
+                                <path id="Icon_material-new-releases" data-name="Icon material-new-releases" d="M34.5,18l-3.66-4.17.51-5.52L25.935,7.08,23.1,2.31,18,4.5,12.9,2.31,10.065,7.08,4.65,8.3l.51,5.52L1.5,18l3.66,4.17L4.65,27.7l5.415,1.23L12.9,33.7,18,31.5l5.1,2.19,2.835-4.77,5.415-1.23-.51-5.52Zm-15,7.5h-3v-3h3Zm0-6h-3v-9h3Z" transform="translate(-1.5 -2.31)" fill="#fff"/>
+                            </svg>
+
+                            Nouveau produit </span></h1>
+                    {% endif %}
+                </div>
+
+                <p><img src="{{ product.picture }}"></p>
+                <div class="card-body">
+                    {# Titre de la card #}
+                    <h5 class="card-title">{{ product.libelle }}</h5>
+                    {# Prix de la card #}
+                    <p class="card-text">{{ product.price }}€</p>
+                    {# texte de la card #}
+                    <p class="card-text">Il reste {{ product.stock }} exemplaires</p>
+                    <div class="custom-control custom-checkbox">
+                        {# Option emballage #}
+                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Emballage cadeau ? (option gratuite)</label>
+                    </div>
+                    {# Bouton ajout au panier #}
+                    <a href="{{ path('cart_add',{'id':product.id}) }}" class="myButton mt-3 mb-3" id="add_basket">Ajouter au panier</a>
+                    <p>
+                        {# Lien description produit #}
+                        <a class="link_show_product" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Description 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 45 45">
+                                <path id="Icon_awesome-arrow-down" data-name="Icon awesome-arrow-down" d="M42.383,21.383l2.288,2.23a2.358,2.358,0,0,1,0,3.4L24.649,46.542a2.508,2.508,0,0,1-3.493,0L1.124,27.017a2.358,2.358,0,0,1,0-3.4l2.288-2.23a2.521,2.521,0,0,1,3.534.04l11.83,12.1V4.66a2.437,2.437,0,0,1,2.473-2.41h3.3a2.437,2.437,0,0,1,2.473,2.41V33.526l11.83-12.1A2.5,2.5,0,0,1,42.383,21.383Z" transform="translate(-0.397 -2.25)"/>
+                            </svg>
+                        </a>
+                    </p>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="collapse mb-3" id="multiCollapseExample1">
+                                {# description de la card #}
+                                <div class="card card-body">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus gravida pharetra laoreet. Pellentesque n
+                                    on scelerisque tortor. Vivamus sit amet velit eget ex porta molestie sed at eros. Sed vulputate eget odio e
+                                    u consectetur. Etiam consequat odio non mauris pharetra, quis tempus elit consequat. Integer efficitur odi
+                                    o eu consectetur congue. Pellentesque et sem quis lacus fringilla mattis. Cras purus libero, cursus at fe
+                                    ugiat ut, vehicula id tortor. In sagittis varius risus vel elementum.
+
+                                    Sed quis lectus auctor, gravida augue quis, condimentum est. Donec eu hendrerit mi. Praesen
+                                    t eget placerat nisi, sit amet iaculis mauris. Phasellus dictum libero sit amet mollis rhoncus. Nulla vene vehi
+                                    {% for produit in monthlysales %}
+                                        {{ produit.Total }}
+                                    {{ produit.ProductName }} {{ produit.Mois }}
+                                        {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {# Information d'envoi et de paiement #}
+                    <div class="informations_ship">
+                        <div class="row">
+                            <div class="col-4">
+                                {# Logo Paiement sécurisé #}
+                                <p><svg xmlns="http://www.w3.org/2000/svg" width="31.5" height="36" viewBox="0 0 31.5 36">
+                                        <path id="Icon_awesome-lock" data-name="Icon awesome-lock" d="M28.125,15.75H26.438V10.688a10.688,10.688,0,0,0-21.375,0V15.75H3.375A3.376,3.376,0,0,0,0,19.125v13.5A3.376,3.376,0,0,0,3.375,36h24.75A3.376,3.376,0,0,0,31.5,32.625v-13.5A3.376,3.376,0,0,0,28.125,15.75Zm-7.312,0H10.688V10.688a5.063,5.063,0,0,1,10.125,0Z"/>
+                                    </svg>
+                                    Paiement sécurisé</p>
+                            </div>
+                            <div class="col-4">
+                                {# Logo livraiosn #}
+                                <p><svg xmlns="http://www.w3.org/2000/svg" width="31.6" height="36" viewBox="0 0 31.6 36">
+                                        <path id="Icon_material-local-shipping" data-name="Icon material-local-shipping" d="M28.791,15H24.482V6H4.373C2.793,6,1.5,8.025,1.5,10.5V35.25H4.373C4.373,38.985,6.3,42,8.682,42s4.309-3.015,4.309-6.75h8.618c0,3.735,1.925,6.75,4.309,6.75s4.309-3.015,4.309-6.75H33.1V24ZM8.682,38.625c-1.192,0-2.155-1.507-2.155-3.375s.962-3.375,2.155-3.375,2.155,1.507,2.155,3.375S9.874,38.625,8.682,38.625Zm19.391-20.25L30.888,24H24.482V18.375Zm-2.155,20.25c-1.192,0-2.155-1.507-2.155-3.375s.962-3.375,2.155-3.375,2.155,1.507,2.155,3.375S27.11,38.625,25.918,38.625Z" transform="translate(-1.5 -6)"/>
+                                    </svg>
+                                    Livraison gratuite à partir de 120€ d'achat</p>
+                            </div>
+                            <div class="col-4">
+                                {# Logo médaille /s 24h #}
+                                <p><svg xmlns="http://www.w3.org/2000/svg" width="31.6" height="36" viewBox="0 0 31.6 36">
+                                        <path id="Icon_awesome-medal" data-name="Icon awesome-medal" d="M13.81,9.193l-4.267-8.1A1.939,1.939,0,0,0,7.849,0H.989A1.14,1.14,0,0,0,.18,1.77L7.048,12.947A12.232,12.232,0,0,1,13.81,9.193ZM30.611,0h-6.86a1.939,1.939,0,0,0-1.694,1.093l-4.267,8.1a12.235,12.235,0,0,1,6.762,3.753L31.42,1.77A1.14,1.14,0,0,0,30.611,0ZM15.8,11.25c-6,0-10.863,5.541-10.863,12.375S9.8,36,15.8,36s10.863-5.541,10.863-12.375S21.8,11.25,15.8,11.25Zm5.71,11.057-2.341,2.6.554,3.672c.1.658-.51,1.161-1.028.85l-2.9-1.733-2.895,1.733c-.518.313-1.126-.193-1.028-.85l.554-3.672-2.341-2.6a.841.841,0,0,1,.392-1.377l3.236-.537,1.446-3.341a.675.675,0,0,1,1.272,0l1.446,3.341,3.236.537a.841.841,0,0,1,.392,1.377Z" transform="translate(0)"/>
+                                    </svg>
+                                    Livraison sous 24h</p>
+                            </div>
+                        </div>
+                    </div>
+                    {# Réseaux sociaux #}
+                    <div class="share">
+                        <p> Partager ce produit</p>
+                        {# Facebook #}
+                        <a href="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 35 35">
+                                <path id="Icon_awesome-facebook-f" data-name="Icon awesome-facebook-f" d="M34.316,19.688l1.815-6.334H24.783V9.243c0-1.733,1.585-3.422,6.668-3.422h5.159V.428S31.928,0,27.452,0C18.106,0,12,3.034,12,8.526v4.828H1.609v6.334H12V35H24.783V19.688Z" transform="translate(-1.609)"/>
+                            </svg>
+                        </a>
+                        {# Twitter #}
+                        <a href="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 35 35">
+                                <path id="Icon_awesome-twitter" data-name="Icon awesome-twitter" d="M31.4,12.1c.022.383.022.766.022,1.148,0,11.676-7.218,25.129-20.409,25.129A17.625,17.625,0,0,1,0,34.416a12.082,12.082,0,0,0,1.732.109,12.766,12.766,0,0,0,8.905-3.773c-3.154-.082-5.8-2.625-6.707-6.125a7.39,7.39,0,0,0,1.355.137,6.253,6.253,0,0,0,1.888-.3c-3.287-.82-5.752-4.375-5.752-8.668v-.109a6.239,6.239,0,0,0,3.242,1.121,9.5,9.5,0,0,1-3.2-7.355,10.358,10.358,0,0,1,.977-4.457c3.531,5.359,8.839,8.859,14.791,9.242a12.193,12.193,0,0,1-.178-2.023c0-4.867,3.2-8.832,7.173-8.832A6.615,6.615,0,0,1,29.47,6.17a12.643,12.643,0,0,0,4.553-2.133A8.719,8.719,0,0,1,30.869,8.9,12.323,12.323,0,0,0,35,7.537,17.824,17.824,0,0,1,31.4,12.1Z" transform="translate(0 -3.381)"/>
+                            </svg>
+                        </a>
+                        {# Instagram #}
+                        <a href="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 35 35">
+                                <path id="Icon_awesome-instagram" data-name="Icon awesome-instagram" d="M17.5,10.764a8.974,8.974,0,1,0,8.972,8.974A8.958,8.958,0,0,0,17.5,10.764Zm0,14.808a5.834,5.834,0,1,1,5.833-5.834A5.844,5.844,0,0,1,17.5,25.572ZM28.93,10.4A2.093,2.093,0,1,1,26.837,8.3,2.088,2.088,0,0,1,28.93,10.4Zm5.942,2.124c-.133-2.8-.773-5.287-2.827-7.333S27.516,2.5,24.713,2.361c-2.889-.164-11.548-.164-14.437,0C7.481,2.493,5,3.134,2.944,5.18S.258,9.71.118,12.514c-.164,2.89-.164,11.551,0,14.44.133,2.8.773,5.287,2.827,7.333s4.529,2.687,7.332,2.827c2.889.164,11.548.164,14.437,0,2.8-.133,5.286-.773,7.332-2.827s2.686-4.53,2.827-7.333c.164-2.89.164-11.543,0-14.433ZM31.139,30.055a5.906,5.906,0,0,1-3.326,3.327c-2.3.914-7.769.7-10.315.7s-8.019.2-10.315-.7a5.906,5.906,0,0,1-3.326-3.327c-.914-2.3-.7-7.771-.7-10.317s-.2-8.021.7-10.317A5.906,5.906,0,0,1,7.184,6.094c2.3-.914,7.769-.7,10.315-.7s8.019-.2,10.315.7a5.906,5.906,0,0,1,3.326,3.327c.914,2.3.7,7.771.7,10.317S32.053,27.758,31.139,30.055Z" transform="translate(0.005 -2.238)"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+
+    </div>
+{% endblock %}

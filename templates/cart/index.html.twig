@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre panier!
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+        <div class="bg-light col-12 p-3">
+            <h1>Votre panier</h1>
+        </div>
+        {% for message in app.flashes('delete_product') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% if items | length > 0 %}
+            <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Produit</th>
+                        <th>Prix</th>
+                        <th>Quantité</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td>{{item.product.libelle}}</td>
+                            <td>{{item.product.price}}</td>
+                            <td class="mr-5"><div class="row ">
+                                    <div class="col-6 col-lg-4  ">
+                                    <form method='POST' action ="{{ path('cart_remove',{'id':item.product.id}) }}"><input type="number" class="form-control" id="nb_product" name="nb_product" value="{{item.quantity}}">
+                                        </div>
+                                        <div class="col-3 col-lg-8 ">
+                                        <button type='submit' class="btn btn-profil btn-sm  p-2">Mettre a jour la quantité</button></form>
+                                    </div>
+                            </div></td>
+                            <td>{{item.product.price * item.quantity}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td class="">Nombre de produits :
+                            {{ Cquantity }}</td>
+                        <td class="">Total :
+                            {{total}}</td>
+                        <td></td>
+                </tfoot>
+            </table>
+                         {% if app.user %}
+                        <a href="{{ path('cart_validate')}}" class="btn btn-profil">Valider la commande</a>
+                        {% else%}
+                            <a href="" class="btn btn-profil" >Vous devez être connecté pour valider votre panier</a>
+                        {% endif %}    
+                        
+            </div>
+        </div>
+        {% else %}
+            <p>Surprise, c'est vide !</p>
+        {% endif %}
+    </div>
+{% endblock %}

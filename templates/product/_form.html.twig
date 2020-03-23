@@ -1,0 +1,20 @@
+{{ form_start(form) }}
+
+
+        {{ form_row(form.libelle, { 'label': 'Nom du produit' }) }}
+
+        {{ form_row(form.description, { 'label': 'Description du produit' }) }}
+
+        {{ form_row(form.color, { 'label': 'Couleur du produit' }) }}
+
+        {{ form_row(form.picture, { 'label': 'Photo du produit' }) }}
+
+        {{ form_row(form.productCategory, { 'label': 'Catégorie du produit' }) }}
+
+        {{ form_row(form.price, { 'label': 'Prix du produit' }) }}
+
+        {{ form_row(form.stock, { 'label': 'Stock du produit' }) }}
+
+
+    <button class="btn btn-success mb-5">{{ button_label|default('Ajouter au catalogue') }}</button>
+{{ form_end(form) }}

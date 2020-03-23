@@ -1,0 +1,25 @@
+{{ form_start(form) }}
+    {{ form_label(form.mail, 'Adresse e-mail') }}
+    {{ form_widget(form.mail, {'attr': {'placeholder' : "Email", 'class' : "form-control"}}) }}
+
+    {{ form_label(form.surname, 'Nom') }}
+    {{ form_widget(form.surname, {'attr': {'placeholder' : "Nom de famille", 'class' : "form-control"}}) }}
+
+    {{ form_label(form.first_name, 'Prénom') }}
+    {{ form_widget(form.first_name, {'attr': {'placeholder' : "Prénom", 'class' : "form-control"}}) }}
+
+    {{ form_label(form.phone_number, 'Numéro') }}
+    {{ form_widget(form.phone_number, {'attr': {'placeholder' : "Numéro de téléphone", 'class' : "form-control"}}) }}
+    
+    {{ form_label(form.address_ship, 'Adresse') }}
+    {{ form_widget(form.address_ship, {'attr': {'placeholder' : "Adresse postale", 'class' : "form-control"}}) }}
+
+    {{ form_label(form.role, 'Droits d\'administrateur') }}
+    {{ form_widget(form.role, {'attr': {'placeholder' : "role (1 pour oui)", 'class' : "form-control"}}) }}
+
+    
+    {{ form_label(form.type, {'attr': {'class' : "form-check-label"}}) }}
+    {{ form_widget(form.type, {'attr': {'class' : "form-check-input"}}) }}
+
+    <button class="btn btn-success mb-5 mt-3">{{ button_label|default('Ajouter l\utilisateur') }}</button>
+{{ form_end(form) }}

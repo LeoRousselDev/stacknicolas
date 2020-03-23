@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% if not app.user %}
+        <div class="alert alert-warning" role="alert">
+            Veuillez vous connecter pour accéder à cette page !
+        </div>
+    {% else %}
+        <div class="container">
+            <h1>Historique des commandes</h1>
+            {% if orders | length == 0 %}
+                <p>Vous n'avez aucun historique</p> 
+            {% else %}
+                {% for order in orders %}
+                    <p> Commande numéro {{order.id}}<p>
+                    
+                {% endfor %}
+            {% endif %}
+            <a href="{{ path('profil') }}">Retour</a>
+        </div>
+    {% endif %}
+{% endblock %}

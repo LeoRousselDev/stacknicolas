@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contactez nous{% endblock %}
+
+{% block body %}   
+    <div class="container text-center">
+
+
+        <h1>Contactez-nous</h1>
+        {{ form_start(form) }}
+        
+        {{ form_label(form.mail, 'Adresse e-mail') }}
+        {{ form_widget(form.mail, {'attr': {'placeholder' : "Email", 'class' : "form-control"}}) }}
+
+        {{ form_label(form.subject, 'Sujet') }}
+        {{ form_widget(form.subject, {'attr': {'placeholder' : "Sujet", 'class' : "form-control"}}) }}
+        
+        {{ form_label (form.message, 'Message') }}
+        {{ form_widget(form.message, {'attr': {'placeholder' : "Contenu du message", 'class' : "form-control"}}) }}
+       
+        <button type="submit" class="btn-profil mt-2 mb-4">
+            Envoyer le ticket
+        </button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

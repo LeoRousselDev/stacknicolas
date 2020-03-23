@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}StackOrigami{% endblock %}</title>
+    {% block stylesheets %}
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet"/>
+    {% endblock %}
+</head>
+
+<body>
+<nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a id="logo_text" href="{{ path('home') }}">StackOrigami</a>
+        <ul class="lg-pl-5 navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item  ">
+                <a class="nav-link" href="{{ path('home') }}">Accueil</a> <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item  ">
+                <a class="nav-link" href="{{ path('catalog') }}">Catalogue</a> <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="lg-pl-5 nav-item  ">
+                <a class="nav-link" href="{{ path('about_us') }}">Qui sommes-nous ? <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="lg-pl-5 nav-item  ">
+                <a class="nav-link" href="{{ path('contact_new') }}">Contact <span class="sr-only">(current)</span></a>
+            </li>
+
+            <!-- Condition d'affichage connexion/déconnexion -->
+            {% if not app.user %}
+                <li class="lg-pl-5 nav-item  ">
+                    <a class="nav-link" href="{{ path('security_login') }}">Connexion <span class="sr-only">(current)</span></a>
+                </li>
+            {% endif %}
+        </ul>
+        <!-- Logo recherche -->
+        <form class="lg-pl-5 form-inline my-2 my-lg-0">
+
+            <!-- Condition d'apparition logo profil -->
+            {% if not app.user %}
+            {% else %}
+                <!-- Logo profil -->
+                <a href="{{ path('profil') }}" class="mr-1">
+                    <div class="row">
+                    <div class="typewriter">
+                        <p>Bonjour {{ app.user.surname }} {{ app.user.firstName }}</p>
+                    </div>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+                        <path id="Icon_awesome-user-alt" data-name="Icon awesome-user-alt" d="M18,20.25A10.125,10.125,0,1,0,7.875,10.125,10.128,10.128,0,0,0,18,20.25Zm9,2.25H23.126a12.24,12.24,0,0,1-10.252,0H9a9,9,0,0,0-9,9v1.125A3.376,3.376,0,0,0,3.375,36h29.25A3.376,3.376,0,0,0,36,32.625V31.5A9,9,0,0,0,27,22.5Z" fill="#e9e9e9"/>
+                    </svg>
+                    </div>
+                </a>
+
+
+                <a href="{{ path('security_logout') }}" class="mr-1 ml-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="31.5" viewBox="0 0 36 31.5">
+                        <path id="Icon_open-account-logout" data-name="Icon open-account-logout" d="M13.5,0V4.5h18V27h-18v4.5H36V0ZM9,9,0,15.75,9,22.5V18H27V13.5H9Z" fill="#e9e9e9"/>
+                    </svg>
+
+
+                </a>
+
+                        {% if app.user.role == 1 %}
+                        <a href="{{path('administration')}}" class="">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="31.5" viewBox="0 0 40 31.5">
+  <path id="Icon_material-settings" data-name="Icon material-settings" d="M38.687,20.294a9.459,9.459,0,0,0,.144-1.543,9.459,9.459,0,0,0-.144-1.543l4.338-2.6a.677.677,0,0,0,.247-1.008L39.16,8.15A1.2,1.2,0,0,0,37.906,7.8l-5.12,1.575a16.61,16.61,0,0,0-3.475-1.544L28.53,3.662A.956.956,0,0,0,27.523,3H19.3a.956.956,0,0,0-1.007.662L17.51,7.835a17.467,17.467,0,0,0-3.475,1.543L8.915,7.8a1.16,1.16,0,0,0-1.254.346L3.549,13.6A.664.664,0,0,0,3.8,14.608l4.338,2.6A9.626,9.626,0,0,0,7.99,18.75a9.626,9.626,0,0,0,.144,1.543L3.8,22.892A.677.677,0,0,0,3.549,23.9l4.112,5.45a1.2,1.2,0,0,0,1.254.347l5.12-1.575a16.609,16.609,0,0,0,3.475,1.544l.781,4.174A.956.956,0,0,0,19.3,34.5h8.224a.956.956,0,0,0,1.007-.661l.781-4.174a17.468,17.468,0,0,0,3.475-1.544l5.12,1.575a1.16,1.16,0,0,0,1.254-.347l4.112-5.45a.677.677,0,0,0-.247-1.008l-4.338-2.6ZM23.411,24.263c-3.968,0-7.2-2.473-7.2-5.513s3.228-5.513,7.2-5.513,7.2,2.473,7.2,5.513S27.379,24.263,23.411,24.263Z" transform="translate(-3.406 -3)" fill="#fff"/>
+</svg>
+
+
+</a>
+                        {%endif%}
+
+            {% endif %}
+
+
+                <!-- Logo panier -->
+                <a href="{{ path('cart_index') }}" class="mr-1 ml-3">
+                    <span class="basket" id="basket">{{ app.session.get('Fcount') }}</span>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40.5" height="31.5" viewBox="0 0 40.5 31.5">
+                            <path id="Icon_awesome-shopping-basket" data-name="Icon awesome-shopping-basket" d="M40.5,15.188v1.125A1.687,1.687,0,0,1,38.813,18H38.25L36.414,30.852a3.375,3.375,0,0,1-3.341,2.9H7.427a3.375,3.375,0,0,1-3.341-2.9L2.25,18H1.688A1.687,1.687,0,0,1,0,16.313V15.188A1.687,1.687,0,0,1,1.688,13.5H6.422L13.93,3.177A2.25,2.25,0,1,1,17.57,5.823L11.987,13.5H28.513L22.93,5.823A2.25,2.25,0,0,1,26.57,3.177L34.078,13.5h4.735A1.687,1.687,0,0,1,40.5,15.188ZM21.938,27.563V19.688a1.688,1.688,0,0,0-3.375,0v7.875a1.688,1.688,0,0,0,3.375,0Zm7.875,0V19.688a1.688,1.688,0,0,0-3.375,0v7.875a1.688,1.688,0,0,0,3.375,0Zm-15.75,0V19.688a1.688,1.688,0,0,0-3.375,0v7.875a1.688,1.688,0,0,0,3.375,0Z" transform="translate(0 -2.25)" fill="#e9e9e9"/>
+                        </svg>
+
+                    </a>
+                    
+                    
+        </form>
+    </div>            
+</nav>
+
+{% block body %}
+
+{% endblock %}
+
+{% block footer %}
+
+    <div class="footer text-center col-12 mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="link_footer">Origami, simplement étonnant.</h3>
+            </div>
+        </div>
+        <!-- Inscription a la newsletter -->
+        <div class="row">
+            <div id="register_newletters pl-0" class="col-6">
+                <p class="link_footer font-weight-bold">Inscrivez-vous à notre newletters pour recevoir nos offres exclusives</p>
+            </div>
+            <!-- Logos réseaux sociaux -->
+            <div id="follow_us" class="col-4">
+                <p class="link_footer font-weight-bold">Suivez nous</p
+                        <!-- Logo facebook -->
+                <a href="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 35 35">
+                        <path id="Icon_awesome-facebook-f" data-name="Icon awesome-facebook-f" d="M34.316,19.688l1.815-6.334H24.783V9.243c0-1.733,1.585-3.422,6.668-3.422h5.159V.428S31.928,0,27.452,0C18.106,0,12,3.034,12,8.526v4.828H1.609v6.334H12V35H24.783V19.688Z" transform="translate(-1.609)"/>
+                    </svg>
+                </a>
+                <!-- Logo twitter -->
+                <a href="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 35 35">
+                        <path id="Icon_awesome-twitter" data-name="Icon awesome-twitter" d="M31.4,12.1c.022.383.022.766.022,1.148,0,11.676-7.218,25.129-20.409,25.129A17.625,17.625,0,0,1,0,34.416a12.082,12.082,0,0,0,1.732.109,12.766,12.766,0,0,0,8.905-3.773c-3.154-.082-5.8-2.625-6.707-6.125a7.39,7.39,0,0,0,1.355.137,6.253,6.253,0,0,0,1.888-.3c-3.287-.82-5.752-4.375-5.752-8.668v-.109a6.239,6.239,0,0,0,3.242,1.121,9.5,9.5,0,0,1-3.2-7.355,10.358,10.358,0,0,1,.977-4.457c3.531,5.359,8.839,8.859,14.791,9.242a12.193,12.193,0,0,1-.178-2.023c0-4.867,3.2-8.832,7.173-8.832A6.615,6.615,0,0,1,29.47,6.17a12.643,12.643,0,0,0,4.553-2.133A8.719,8.719,0,0,1,30.869,8.9,12.323,12.323,0,0,0,35,7.537,17.824,17.824,0,0,1,31.4,12.1Z" transform="translate(0 -3.381)"/>
+                    </svg>
+                </a>
+                <!-- Logo instagram -->
+                <a href="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 35 35">
+                        <path id="Icon_awesome-instagram" data-name="Icon awesome-instagram" d="M17.5,10.764a8.974,8.974,0,1,0,8.972,8.974A8.958,8.958,0,0,0,17.5,10.764Zm0,14.808a5.834,5.834,0,1,1,5.833-5.834A5.844,5.844,0,0,1,17.5,25.572ZM28.93,10.4A2.093,2.093,0,1,1,26.837,8.3,2.088,2.088,0,0,1,28.93,10.4Zm5.942,2.124c-.133-2.8-.773-5.287-2.827-7.333S27.516,2.5,24.713,2.361c-2.889-.164-11.548-.164-14.437,0C7.481,2.493,5,3.134,2.944,5.18S.258,9.71.118,12.514c-.164,2.89-.164,11.551,0,14.44.133,2.8.773,5.287,2.827,7.333s4.529,2.687,7.332,2.827c2.889.164,11.548.164,14.437,0,2.8-.133,5.286-.773,7.332-2.827s2.686-4.53,2.827-7.333c.164-2.89.164-11.543,0-14.433ZM31.139,30.055a5.906,5.906,0,0,1-3.326,3.327c-2.3.914-7.769.7-10.315.7s-8.019.2-10.315-.7a5.906,5.906,0,0,1-3.326-3.327c-.914-2.3-.7-7.771-.7-10.317s-.2-8.021.7-10.317A5.906,5.906,0,0,1,7.184,6.094c2.3-.914,7.769-.7,10.315-.7s8.019-.2,10.315.7a5.906,5.906,0,0,1,3.326,3.327c.914,2.3.7,7.771.7,10.317S32.053,27.758,31.139,30.055Z" transform="translate(0.005 -2.238)"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <!-- Moyens de paiement -->
+        <div class="paiement_methods ">
+            <div class="row">
+                <div class="col-6">
+                    <p class="link_footer" >Moyens de paiements acceptés :
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30.849 13.197">
+                            <path id="Icon_payment-cb" data-name="Icon payment-cb" d="M10.572,24.06h8.166a6.175,6.175,0,0,1-1.98,5.031q-1.98,1.568-6.1,1.567-4.289,0-6.186-1.567a6.308,6.308,0,0,1-1.9-5.031q0-3.3,1.485-4.7,1.98-1.9,6.6-1.9,4.288,0,6.351,1.732a5.322,5.322,0,0,1,1.65,4.289H10.572v.577Zm20.043-.578H19.232V17.708H30.368A2.959,2.959,0,0,1,33.255,20.6a2.853,2.853,0,0,1-.742,1.98,2.71,2.71,0,0,1-1.9.908Zm-.082.578a3.028,3.028,0,0,1,2.021.99,3.106,3.106,0,0,1,.866,2.227,2.864,2.864,0,0,1-.866,2.1,3.1,3.1,0,0,1-2.021.949h-11.3V24.06h11.3Z" transform="translate(-2.571 -17.461)"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 35.515 36">
+                            <path id="Icon_simple-paypal" data-name="Icon simple-paypal" d="M10.362,36H5.706a1.381,1.381,0,0,1-1.4-1.77l.223-1.011H7.632a2.394,2.394,0,0,0,2.223-1.773l1.6-6.888a2.4,2.4,0,0,1,2.22-1.77H15q8.525,0,13.26-3.51a10.923,10.923,0,0,0,4.74-9.2,8.809,8.809,0,0,0-.882-4.183c0-.024-.024-.047-.024-.069l.2.113a6.935,6.935,0,0,1,2.567,2.721,8.746,8.746,0,0,1,.9,4.187,10.9,10.9,0,0,1-4.746,9.2c-3.15,2.318-7.583,3.486-13.251,3.486h-1.35a2.4,2.4,0,0,0-2.226,1.779l-1.6,6.908a2.376,2.376,0,0,1-2.2,1.755ZM6.347,31.958H1.689a1.383,1.383,0,0,1-1.4-1.77L6.845,1.773A2.393,2.393,0,0,1,9.066,0h9.7a30.555,30.555,0,0,1,5.472.433,11.5,11.5,0,0,1,4.026,1.485,6.914,6.914,0,0,1,2.545,2.727,9.029,9.029,0,0,1,.876,4.2,10.831,10.831,0,0,1-4.746,9.179c-3.15,2.341-7.584,3.489-13.254,3.489H12.359a2.391,2.391,0,0,0-2.217,1.753L8.55,30.146A2.393,2.393,0,0,1,6.323,31.9ZM17.515,5.9H15.994a2.388,2.388,0,0,0-2.22,1.767L12.379,13.7a1.379,1.379,0,0,0,1.4,1.769h1.149a9.8,9.8,0,0,0,5.85-1.531A5.107,5.107,0,0,0,22.866,9.57a3.076,3.076,0,0,0-1.35-2.76A7.275,7.275,0,0,0,17.487,5.9l.028,0Z" transform="translate(-0.241)"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 40.5 31.5">
+                            <path id="Icon_awesome-cc-visa" data-name="Icon awesome-cc-visa" d="M33.054,16.263s.534,2.616.654,3.164H31.359c.232-.626,1.125-3.059,1.125-3.059-.014.021.232-.64.373-1.048l.2.942ZM40.5,5.625v24.75a3.376,3.376,0,0,1-3.375,3.375H3.375A3.376,3.376,0,0,1,0,30.375V5.625A3.376,3.376,0,0,1,3.375,2.25h33.75A3.376,3.376,0,0,1,40.5,5.625ZM10.723,23.288l4.444-10.913H12.178L9.415,19.828l-.3-1.512L8.128,13.3a1.176,1.176,0,0,0-1.28-.921H2.3l-.049.218a11.158,11.158,0,0,1,2.967,1.2l2.517,9.492Zm6.638.014,1.772-10.927H16.305L14.541,23.3h2.82ZM27.2,19.73c.014-1.245-.745-2.194-2.37-2.974-.991-.5-1.6-.837-1.6-1.35.014-.464.513-.942,1.624-.942a4.845,4.845,0,0,1,2.1.415l.253.12.387-2.363a7.022,7.022,0,0,0-2.531-.464c-2.791,0-4.753,1.491-4.767,3.614-.021,1.568,1.406,2.44,2.475,2.967,1.09.534,1.462.886,1.462,1.357-.014.731-.886,1.069-1.695,1.069a5.632,5.632,0,0,1-2.651-.584l-.373-.176-.394,2.454a8.628,8.628,0,0,0,3.15.584C25.242,23.463,27.176,21.994,27.2,19.73ZM37.125,23.3,34.847,12.375H32.66a1.391,1.391,0,0,0-1.477.907l-4.2,10.02h2.967s.485-1.35.591-1.638h3.628c.084.387.338,1.638.338,1.638Z" transform="translate(0 -2.25)"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 40.5 31.5">
+                            <path id="Icon_awesome-cc-mastercard" data-name="Icon awesome-cc-mastercard" d="M33.954,28.849a.788.788,0,1,1-.787-.823A.786.786,0,0,1,33.954,28.849ZM12.1,28.027a.825.825,0,1,0,.766.823A.778.778,0,0,0,12.1,28.027Zm8.262-.021a.652.652,0,0,0-.668.612h1.343A.646.646,0,0,0,20.363,28.005Zm7.58.021a.823.823,0,1,0,.788.823A.778.778,0,0,0,27.942,28.027Zm7.446,1.835c0,.021.021.035.021.077,0,.021-.021.035-.021.077a.247.247,0,0,0-.035.056.091.091,0,0,1-.077.035c-.021.021-.035.021-.077.021a.139.139,0,0,1-.077-.021c-.021,0-.035-.021-.056-.035s-.035-.035-.035-.056a.128.128,0,0,1-.021-.077c0-.035,0-.056.021-.077a.132.132,0,0,1,.035-.077.247.247,0,0,1,.056-.035.128.128,0,0,1,.077-.021c.035,0,.056,0,.077.021s.056.021.077.035S35.367,29.827,35.388,29.862Zm-.155.1c.035,0,.035-.021.056-.021a.086.086,0,0,0,0-.112c-.021,0-.035-.021-.077-.021H35.1v.246h.056v-.1h.021l.077.1h.056l-.077-.091ZM40.5,5.7v24.75a3.376,3.376,0,0,1-3.375,3.375H3.375A3.376,3.376,0,0,1,0,30.445V5.7A3.376,3.376,0,0,1,3.375,2.32h33.75A3.376,3.376,0,0,1,40.5,5.7Zm-36,9.816a9.734,9.734,0,0,0,15.117,8.114,10.486,10.486,0,0,1,0-16.207A9.734,9.734,0,0,0,4.5,15.511Zm15.75,7.65a9.735,9.735,0,0,0,0-15.293A9.735,9.735,0,0,0,20.25,23.161ZM10.245,28.526a.985.985,0,0,0-1.034-1.034,1,1,0,0,0-.9.457.932.932,0,0,0-.858-.457.893.893,0,0,0-.745.38v-.309H6.131v2.58h.577c0-1.329-.176-2.123.633-2.123.717,0,.577.717.577,2.123h.555c0-1.287-.176-2.123.633-2.123.717,0,.577.7.577,2.123h.577V28.526Zm3.157-.963h-.555v.309a1.013,1.013,0,0,0-.823-.38,1.359,1.359,0,0,0,0,2.714.975.975,0,0,0,.823-.38v.323H13.4Zm2.848,1.8c0-1.055-1.61-.577-1.61-1.069,0-.4.837-.337,1.3-.077l.232-.457c-.661-.429-2.123-.422-2.123.577s1.61.584,1.61,1.055c0,.443-.949.408-1.455.056l-.246.443C14.745,30.424,16.249,30.312,16.249,29.362Zm2.489.654-.155-.478c-.267.148-.858.309-.858-.288V28.083h.921v-.52h-.921v-.788h-.577v.788h-.534v.513h.534V29.25c0,1.237,1.216,1.013,1.589.766Zm.935-.942h1.934c0-1.139-.52-1.589-1.223-1.589a1.266,1.266,0,0,0-1.28,1.357,1.4,1.4,0,0,0,2.377,1l-.267-.422c-.548.45-1.378.408-1.54-.345Zm4.155-1.512a.825.825,0,0,0-1.069.309v-.309h-.577v2.58h.577V28.688a.587.587,0,0,1,.9-.591l.169-.534Zm.745,1.287c0-.8.816-1.062,1.455-.591L26.3,27.8a1.392,1.392,0,1,0,0,2.109l-.267-.457C25.383,29.911,24.574,29.637,24.574,28.849Zm4.69-1.287h-.577v.309a1.278,1.278,0,1,0,0,1.955v.323h.577V27.563Zm2.37,0a.845.845,0,0,0-1.069.309v-.309h-.555v2.58h.555V28.688a.59.59,0,0,1,.9-.591l.169-.534Zm2.834-1.048h-.555v1.357a1.278,1.278,0,1,0,0,1.955v.323h.555ZM35,21.234v.323h.056v-.323h.134v-.056h-.323v.056H35Zm.464,8.7a.214.214,0,0,0-.021-.112c-.021-.021-.035-.056-.056-.077s-.056-.035-.077-.056c-.035,0-.077-.021-.112-.021a.747.747,0,0,1-.1.021.367.367,0,0,0-.077.056.11.11,0,0,0-.056.077.214.214,0,0,0-.021.112.2.2,0,0,0,.021.1.11.11,0,0,0,.056.077.244.244,0,0,0,.077.056.191.191,0,0,0,.1.021.214.214,0,0,0,.112-.021c.021-.021.056-.035.077-.056s.035-.056.056-.077A.2.2,0,0,0,35.466,29.939Zm.225-8.768h-.1l-.112.246-.112-.246h-.1v.38h.056v-.288l.112.246h.077l.1-.246v.288h.077ZM36,15.511a9.734,9.734,0,0,0-15.117-8.1,10.486,10.486,0,0,1,0,16.207A9.734,9.734,0,0,0,36,15.511Z" transform="translate(0 -2.32)"/>
+                        </svg>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Liens footer -->
+        <div class="links_footer">
+            <div class="row">
+                <div class="col-4 padding-left-0">
+                    <ul>
+                        <li><a class="link_footer" href="">Mentions légales</a></li>
+                        <li><a class="link_footer" href="">Contact</a></li>
+                        <li><a  class="link_footer" href="">CGU / CGV</a></li>
+                        <li><a  class="link_footer" href="">Plan du site</a></li>
+                    </ul>
+                </div>
+                <div class="col-4">
+                    <ul>
+                        <li><a  class="link_footer" href="">Recrutement</a></li>
+                        <li><a class="link_footer" href="">Nos boutiques</a></li>
+
+                    </ul>
+                </div>
+                <div class="col-4">
+                    <ul>
+                        <li><a class="link_footer" href="">Qui sommes-nous ?</a></li>
+                        <li><a class="link_footer" href="">FAQ</a></li>
+                        <li><a class="link_footer" href="">Le blog de StackOrigami</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="copyrights">
+            <p id="stack">StackOrigami est une entreprise 100% made in France.</p>
+            <p class="font-weight-bold">Copyright 2020 StockOrigami tous droits réservés.</p>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/basket.js') }}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css" />
+    <script src="https://unpkg.com/swiper/js/swiper.js"></script>
+    <script src="../public/js/test.js"></script>
+
+    <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="../package/js/swiper.min.js"></script>
+    <!-- Initialize Swiper -->
+    <script src="../public/js/swiperScript.js"></script>
+{% endblock %}
+
+</body>
+
+</html>

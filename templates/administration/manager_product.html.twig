@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestionnaire de produit{% endblock %}
+
+{% block body %}
+
+<div class="container text-center">
+
+
+    <div class="products col-12">
+        <div class="row">
+            {# boucle pour afficher les articles #}
+            {% for product in products %}
+            <div class="col-4 mt-3">
+
+                <a class="lien_card" href="{{ path('product_show', {'id': product.id}) }}">
+
+                    <div class="card-product">
+                                        {% if product.stock <= 10 %}
+                        <span class="badge  badge-warning">{{product.stock}} produit pensez à ravitailler</span>
+                        {% else %}
+                        <span class="badge badge-success">{{product.stock}} produit</span>
+                        {%endif %}
+                        <img class="card-img-top" src="{{ product.picture }}" alt="{{ product.libelle }} image">
+                        <div class="card-body">
+                            <p class="card-title">{{ product.libelle }}
+                                - {{ product.productCategory.name }}</p>
+                            <p class="card-text small">Ajouter
+                                le {{ product.createdAt | date('d/m/Y') }}</p>
+                            <p class="card-text text-danger">
+                                <span class="text-primary">
+                                    {% if product.stars is same as (NULL) %}
+                                    Pas encore de note
+                                    {% else %}
+                                    {{ product.stars }} ⭐
+                                    {% endif %}
+                                </span> - {{ product.price }}€
+                            </p>
+                        </div>
+                    </div>
+                </a>
+                {% if product.stock == 0 %}
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong> Produit non disponible à la vente (stock = {{product.stock}} veuillez à ré approvisionner
+                        le stock) </strong>
+                </div>
+                {%endif%}
+
+                <p></p>
+                <a href="{{ path('product_edit', {'id': product.id}) }}" class="btn btn-warning mt-5">Modifier ce
+                    produit</a>
+            </div>
+            {% endfor %}
+        </div>
+
+
+    </div>
+    {% endblock %}

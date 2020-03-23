@@ -1,0 +1,39 @@
+{# héritage du fichier de base twig header et footer #}
+{% extends 'base.html.twig' %}
+{# balise title #}
+{% block title %}Contact{% endblock %}
+{# balise body #}
+{% block body %}
+    <h1>Contact</h1>
+    {# Tableau contact #}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ contact.id }}</td>
+            </tr>
+            <tr>
+                <th>Mail</th>
+                <td>{{ contact.mail }}</td>
+            </tr>
+            <tr>
+                <th>Subject</th>
+                <td>{{ contact.subject }}</td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td>{{ contact.message }}</td>
+            </tr>
+            <tr>
+                <th>Date_send</th>
+                <td>{{ contact.dateSend ? contact.dateSend|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {# lien retour #}
+    <a href="{{ path('contact_index') }}">back to list</a>
+    {# lien edit #}
+    <a href="{{ path('contact_edit', {'id': contact.id}) }}">edit</a>
+
+    {{ include('contact/_delete_form.html.twig') }}
+{% endblock %}

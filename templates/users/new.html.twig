@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un utilisateur{% endblock %}
+
+{% block body %}
+    <div class="container text-center">
+    {% if app.user %}
+    {% if app.user.role == 1 %}
+    <h1>Ajouter un utilisateur</h1>
+
+    {{ include('users/_form_admin.html.twig', {'button_label': 'Ajouter'}) }}
+
+    <a class='btn-profil' href="{{ path('users_index') }}">Retour à la liste</a>
+    {% else %}
+    <p>Vous n'êtes pas autorisé à accéder à cette page !</p>
+    <a href="{{ path('home')}}" class="btn-profil">Page d'accueil</a>
+    {% endif %}
+    
+    {% else %}
+        <p>Veuillez vous connecter pour acceder à cette page<p>
+        <a href="{{ path('security_login')}}" class="btn-profil">Connexion</a>
+    {% endif %}
+    </div>
+{% endblock %}

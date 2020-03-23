@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block body %}
+<div class="container text-center">
+{% if app.user %}
+{% if app.user.role == 1 %}
+
+    <h1>Utilisateur {{ user.id }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Mail</th>
+                <td>{{ user.mail }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.surname }}</td>
+            </tr>
+            <tr>
+                <th>Prénom</th>
+                <td>{{ user.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Numéro de téléphone</th>
+                <td>{{ user.phoneNumber }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{% if user.type == 1 %}
+                Particulier
+                {% else %}
+                Entreprise
+                {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Droits d'administration</th>
+                <td>{% if user.role == 1 %}
+                Oui {% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn-profil" href="{{ path('users_index') }}">Retour</a>
+    
+    <a class="btn btn-warning" href="{{ path('users_editAdmin', {'id': user.id}) }}">Modifier</a>
+
+    {{ include('users/_delete_form.html.twig') }}
+    {% else %}
+    
+    <p>Vous n'êtes pas autorisé à accéder à cette page !</p>
+    <a href="{{ path('home')}}" class="btn-profil">Page d'accueil</a>
+    {% endif %}
+    {% else %}
+        <p>Veuillez vous connecter pour acceder à cette page<p>
+        <a href="{{ path('security_login')}}" class="btn-profil">Connexion</a>
+    {% endif %}
+
+
+    </div>
+{% endblock %}

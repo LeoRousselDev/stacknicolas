@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users index{% endblock %}
+
+{% block body %}
+<div class="container text-center">
+
+    {% if not app.user %}
+        <div class="alert alert-warning" role="alert">
+            Veuillez vous connecter pour accéder à cette page !
+        </div>
+        <a href="{{ path('security_login')}}" class="btn-profil">Connexion</a>
+    {% else %}
+    {% if app.user.role == 1 %}
+        <h1>Liste des utilisateurs</h1>
+
+        <div class="table-responsive">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Mail</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Numéro</th>
+                        <th>Type</th>
+                        <th>Administrateur</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.mail }}</td>
+                        <td>{{ user.surname }}</td>
+                        <td>{{ user.firstName }}</td>
+                        <td>{{ user.phoneNumber }}</td>
+                        <td>{% if user.type %} Particulier {% else %} Professionnel {% endif %}</td>
+                        <td>{% if user.role == 1 %} Oui {% endif %}</td>
+                        <td>
+                            <a class="btn btn-warning" href="{{ path('users_editAdmin', {'id': user.id}) }}">Modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+        <a class="btn-profil" href="{{ path('administration')}}">Retour Administration</a>
+
+        {% else %}
+        <p>Vous n'êtes pas autorisé à accéder à cette page !</p>
+        <a href="{{ path('home')}}" class="btn-profil">Page d'accueil</a>
+        {% endif %}
+    {% endif %}
+    </div>
+{% endblock %}

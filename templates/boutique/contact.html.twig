@@ -1,0 +1,52 @@
+{# empty Twig template #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Contactez nous{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="col-12">
+            <h1>Contactez-nous</h1>
+            <div class="table-responsive">
+                {{ form_start(form) }}
+
+                {{ form_row(form.mail, {'attr': {'placeholder' : "Email", 'class' : "form-control"}}) }}
+                {{ form_row(form.subject, {'attr' : { 'class' : "form-control"}}) }}
+                {{ form_row(form.message, {'attr': {'placeholder' : "Contenu du message", 'class' : "form-control"}}) }}
+                {{ form_row(form.date_send)}}
+
+                <button type="submit" class="btn btn-success">
+                    Envoyer le ticket
+                </button>
+                {{ form_end(form) }}
+
+                </form>
+
+            </div>
+            <p>
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et lacus quis purus suscipit porta eu sit amet ex. Donec consequat mattis ante varius condimentum. Cras fringilla sapien vitae bibendum volutpat. Praesent pellentesque purus erat, vitae porta purus lacinia eu. Maecenas congue ornare augue hendrerit tempus. Integer eu diam feugiat, convallis nisl id, eleifend nibh. Phasellus et leo malesuada, porttitor odio eget, mollis nunc. Aenean pharetra feugiat leo, et efficitur diam iaculis et. Quisque quis mauris quis nibh commodo accumsan. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam sit amet ultricies lacus, id auctor sapien. Nullam sit amet libero sed nulla mattis rutrum ac eu nulla. In quam leo, elementum id ligula placerat, ullamcorper eleifend odio. Praesent et faucibus massa. Sed dolor justo, mattis in nisl et, maximus cursus ipsum.
+
+                Aenean gravida libero at mauris tempus, et commodo metus lobortis. Nulla tempus eleifend massa vitae sagittis. Suspendisse ut metus lacus. Nullam sollicitudin interdum dui eget semper. Nulla varius lectus et lectus dignissim pharetra. Quisque vitae elit libero. Morbi imperdiet odio nec elit consequat gravida. Quisque efficitur, purus ac accumsan posuere, felis nibh tempor ipsum, tincidunt cursus elit orci non sapien.
+
+                Proin tincidunt arcu ac purus laoreet fringilla. Mauris dolor neque, vehicula eget justo ut, fermentum volutpat orci. Fusce a elementum nisl. Cras odio mi, maximus sed cursus eget, dapibus ac felis. Sed libero augue, pulvinar in tempor ut, pellentesque nec odio. Suspendisse mauris elit, aliquet sit amet tempus et, lobortis in orci. Curabitur vitae consequat felis, eu suscipit urna. Praesent a urna non nulla mollis laoreet at et lacus. Aenean quis varius metus. Vivamus consectetur feugiat eros vel efficitur. Sed nec sodales purus, at sodales enim. Sed auctor dictum venenatis.
+
+                Quisque consectetur odio at massa gravida facilisis. Phasellus ut ligula eget magna gravida euismod nec non lectus. Sed ultricies placerat efficitur. Proin in tincidunt massa, nec ultricies mi. Aliquam quis imperdiet nisl. Maecenas eu metus iaculis, pulvinar massa id, luctus risus. Cras pulvinar pretium porttitor. Curabitur lacinia, ex nec tincidunt pellentesque, massa justo cursus tellus, et auctor orci enim mattis ex.
+
+                Quisque at lectus pretium tellus mollis vestibulum. Maecenas massa quam, lacinia eget massa non, congue dictum nisl. Praesent suscipit in lectus at porta. Nam non congue neque, eget tincidunt nisi. Aliquam vitae dapibus arcu. Mauris ligula nisi, lobortis eu risus in, pulvinar aliquam est. Nulla aliquam auctor dapibus. Sed eu volutpat urna. Duis elementum mattis diam a mollis. Fusce scelerisque tincidunt convallis. Aliquam quis elit sapien.
+
+            </p>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et lacus quis purus suscipit porta eu sit amet ex. Donec consequat mattis ante varius condimentum. Cras fringilla sapien vitae bibendum volutpat. Praesent pellentesque purus erat, vitae porta purus lacinia eu. Maecenas congue ornare augue hendrerit tempus. Integer eu diam feugiat, convallis nisl id, eleifend nibh. Phasellus et leo malesuada, porttitor odio eget, mollis nunc. Aenean pharetra feugiat leo, et efficitur diam iaculis et. Quisque quis mauris quis nibh commodo accumsan. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam sit amet ultricies lacus, id auctor sapien. Nullam sit amet libero sed nulla mattis rutrum ac eu nulla. In quam leo, elementum id ligula placerat, ullamcorper eleifend odio. Praesent et faucibus massa. Sed dolor justo, mattis in nisl et, maximus cursus ipsum.
+
+                Aenean gravida libero at mauris tempus, et commodo metus lobortis. Nulla tempus eleifend massa vitae sagittis. Suspendisse ut metus lacus. Nullam sollicitudin interdum dui eget semper. Nulla varius lectus et lectus dignissim pharetra. Quisque vitae elit libero. Morbi imperdiet odio nec elit consequat gravida. Quisque efficitur, purus ac accumsan posuere, felis nibh tempor ipsum, tincidunt cursus elit orci non sapien.
+
+                Proin tincidunt arcu ac purus laoreet fringilla. Mauris dolor neque, vehicula eget justo ut, fermentum volutpat orci. Fusce a elementum nisl. Cras odio mi, maximus sed cursus eget, dapibus ac felis. Sed libero augue, pulvinar in tempor ut, pellentesque nec odio. Suspendisse mauris elit, aliquet sit amet tempus et, lobortis in orci. Curabitur vitae consequat felis, eu suscipit urna. Praesent a urna non nulla mollis laoreet at et lacus. Aenean quis varius metus. Vivamus consectetur feugiat eros vel efficitur. Sed nec sodales purus, at sodales enim. Sed auctor dictum venenatis.
+
+                Quisque consectetur odio at massa gravida facilisis. Phasellus ut ligula eget magna gravida euismod nec non lectus. Sed ultricies placerat efficitur. Proin in tincidunt massa, nec ultricies mi. Aliquam quis imperdiet nisl. Maecenas eu metus iaculis, pulvinar massa id, luctus risus. Cras pulvinar pretium porttitor. Curabitur lacinia, ex nec tincidunt pellentesque, massa justo cursus tellus, et auctor orci enim mattis ex.
+
+                Quisque at lectus pretium tellus mollis vestibulum. Maecenas massa quam, lacinia eget massa non, congue dictum nisl. Praesent suscipit in lectus at porta. Nam non congue neque, eget tincidunt nisi. Aliquam vitae dapibus arcu. Mauris ligula nisi, lobortis eu risus in, pulvinar aliquam est. Nulla aliquam auctor dapibus. Sed eu volutpat urna. Duis elementum mattis diam a mollis. Fusce scelerisque tincidunt convallis. Aliquam quis elit sapien.</p>
+
+        </div>
+    </div>
+{% endblock %}

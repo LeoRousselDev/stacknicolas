@@ -1,0 +1,17 @@
+{# héritage du fichier de base twig header et footer #}
+{% extends 'base.html.twig' %}
+{# balise title #}
+{% block title %}Ajout produit{% endblock %}
+{# balise body #}
+{% block body %}
+
+    <div class="container text-center">
+
+    <h1>Ajout produit</h1>
+
+    {{ include('product/_form.html.twig') }}
+    {# lien retour #}
+    <a href="{{ path('manager_product') }}" class="btn-profil">Retour au catalogue</a>
+    
+    </div>
+{% endblock %}

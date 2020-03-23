@@ -1,0 +1,42 @@
+{# empty Twig template #}
+
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+
+{% block body %}
+
+{% if app.user %}
+    <p>Vous êtes déjà connecté</p>
+    <a href="{{ path('profil') }}" class="btn-profil mt-2 mb-4">Profil</a>
+{% else %}
+
+    <div class="container text-center">
+        <h1>Inscription</h1>
+
+        {{ form_start(form) }}
+            {{ form_label(form.mail, 'Adresse e-mail') }}
+            {{ form_widget(form.mail, {'attr': {'placeholder' : "Email", 'class' : "form-control"}}) }}
+            
+            {{ form_label(form.password, 'Mot de passe') }}
+            {{ form_widget(form.password, {'attr': {'placeholder' : "Mot de passe", 'class' : "form-control"}}) }}
+            
+            {{ form_label(form.surname, 'Nom') }}
+            {{ form_widget(form.surname, {'attr': {'placeholder' : "Nom de famille", 'class' : "form-control"}}) }}
+            
+            {{ form_label(form.first_name, 'Prénom') }}
+            {{ form_widget(form.first_name, {'attr': {'placeholder' : "Prénom", 'class' : "form-control"}}) }}
+            
+            {{ form_label(form.phone_number, 'Numéro') }}
+            {{ form_widget(form.phone_number, {'attr': {'placeholder' : "Numéro de téléphone", 'class' : "form-control"}}) }}
+
+            {{ form_label(form.type, {'attr': {'class' : "form-check-label"}}) }}
+            {{ form_widget(form.type, {'attr': {'class' : "form-check-input"}}) }}
+
+        <button type="submit" class="btn-profil mt-2 mb-4">Inscription</button>
+
+        {{ form_end(form) }}
+
+    </div>
+    {% endif %}
+{% endblock %}

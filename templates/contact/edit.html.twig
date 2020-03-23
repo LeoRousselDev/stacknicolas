@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Contact{% endblock %}
+
+{% block body %}
+    <div class="container text-center">
+
+        <h1>Edit Contact</h1>
+
+        {# récupère le formulaire de modification #}
+        {{ include('contact/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+        <a href="{{ path('contact_index') }}">back to list</a>
+
+        {{ include('contact/_delete_form.html.twig') }}
+        
+    </div>
+{% endblock %}

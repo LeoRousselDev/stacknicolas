@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Modification du profil{% endblock %}
+
+{% block body %}
+    <div class="container text-center">
+    {% if app.user %}
+        {% if app.user.role == 1%}
+            <h1>Modification du profil</h1>
+
+            {{ include('users/_form_admin.html.twig', {'button_label': 'Enregistrer'}) }}
+
+            <a class='btn btn-warning' href="{{ path('users_index') }}">Retour</a>
+            
+            {{ include('users/_delete_form.html.twig') }}
+        {% else %}
+        
+        <p>Vous n'êtes pas autorisé à accéder à cette page !</p>
+        <a href="{{ path('home')}}" class="btn-profil">Page d'accueil</a>
+        {% endif %}
+    {% else %}
+        <p>Veuillez vous connecter pour acceder à cette page<p>
+        <a href="{{ path('security_login')}}" class="btn-profil">Connexion</a>
+    {% endif %}
+    </div>
+{% endblock %}

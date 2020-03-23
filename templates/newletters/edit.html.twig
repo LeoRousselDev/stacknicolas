@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Newletters{% endblock %}
+
+{% block body %}
+    <h1>Edit Newletters</h1>
+
+    {{ include('newletters/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('newletters_index') }}">back to list</a>
+
+    {{ include('newletters/_delete_form.html.twig') }}
+{% endblock %}
